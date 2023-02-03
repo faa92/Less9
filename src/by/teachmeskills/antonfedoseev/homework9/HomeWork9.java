@@ -5,7 +5,7 @@ public class HomeWork9 {
         char[] sim = new char[]{'H', 'E','L','L','O'};
         char[] sim1 = new char[]{'Ц','Ё','Ж'};
 
-        System.out.println(StringUtils.isRussia(sim1));
+        System.out.println(StringUtils.isRussia(sim));
 
 
 

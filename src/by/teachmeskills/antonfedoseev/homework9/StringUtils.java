@@ -30,7 +30,7 @@ public class StringUtils {
     public static boolean isRussia (char[] arr) {
         for (int i = 0; i < arr.length; i++) {
             // Character.UnicodeBlock.of(arr[i]).equals(Character.UnicodeBlock.CYRILLIC)
-            if (i >= 'А' && i <= 'я') {
+            if (i < 'А' || i > 'я') {
                 return true;
             }
         }
