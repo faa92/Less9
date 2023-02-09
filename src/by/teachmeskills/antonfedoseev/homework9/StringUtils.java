@@ -12,71 +12,62 @@ public class StringUtils {
     }
 
     public static void println(char[] arr) {
-        for (int i = 0; i < arr.length; i++) {
-            System.out.print(arr[i]);
-        }
+       print(arr);
         System.out.print("\n");
     }
 
     public static boolean isBlank(char[] arr) {
 
         for (int i = 0; i < arr.length; i++) {
-            if (arr.length == 0 || arr[i] == ' ') {
-                return true;
+            if (!Character.isWhitespace(arr[i])) {
+                return false;
             }
-        }
-        return false;
+        }return true;
     }
 
-    public static boolean isRussia(char... arr) {
+
+    public static boolean isRussiaOneChar (char ch) {
+        return (ch >= 'А' && ch <= 'я') || ch == 'ё' || ch == 'Ё';
+    }
+
+    public static boolean isRussia(char[] arr) {
         for (int i = 0; i < arr.length; i++) {
-            if ((arr[i] < 'А' || arr[i] > 'я') && (arr[i] != 'Ё' && arr[i] != 'ё')) {
+            if (!isRussiaOneChar(arr[i])) {
                 return false;
             }
         }
         return true;
     }
 
-    //Задание 4. Списано
     public static boolean contains(char[] arr, char[] subArr) {
-        if (subArr.length == 0) {
-            return true;
-        }
-        if (subArr.length > arr.length) {
-            return false;
-        }
-        if (arr.length == 0) {
-            return subArr.length == 0;
-        }
-        for (int i = 0; i < arr.length - 1; i++) {
-            int match = 0;
+        for (int i = 0; i <= arr.length - subArr.length; i++) {
+            boolean equal = true;
             for (int j = 0; j < subArr.length; j++) {
-                if (arr[i + j] != subArr[j]) {
+                if (arr[i+j] != subArr[j]) {
+                    equal = false;
                     break;
-                } else {
-                    match++;
                 }
             }
-            if (match == subArr.length) {
+            if (equal) {
                 return true;
             }
         }
         return false;
     }
 
-    // Задание 5. Списано
     public static int parseInt(char[] arr) {
         int result = 0;
-        int degree = arr.length - 1;
-
-        for (char ch : arr) {
-            int tmp = ch - '0';
-            if (tmp < 0 || tmp > 9) {
-                throw new IllegalArgumentException("Входная строка не является числом!");
+        for (int i = 0; i < arr.length; i++) {
+            if (!Character.isDigit(arr[i])) {
+                throw new IllegalArgumentException("Элемент массива не число!");
             }
-            result += tmp * Math.pow(10, degree);
-            degree--;
+            int digit = arr[i] - '0';
+            result = result * 10 + digit;
         }
         return result;
     }
+
+
+
 }
+
